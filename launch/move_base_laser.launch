@@ -1,0 +1,11 @@
+<launch>
+ 
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <rosparam file="$(find svl_turtlebot)/config/move_base.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find svl_turtlebot)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find svl_turtlebot)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find svl_turtlebot)/config/gonogo/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find svl_turtlebot)/config/gonogo/global_costmap_params.yaml" command="load" />
+  </node>
+
+</launch>

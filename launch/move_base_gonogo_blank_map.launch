@@ -1,0 +1,26 @@
+ <launch>
+
+   <arg name="map"           default="blank_map_40m_0.1" />
+
+   <!-- Run the map server with the chosen map -->
+   <node name="map_server" pkg="map_server" type="map_server" args="$(find svl_turtlebot)/maps/$(arg map).yaml" output="screen" />
+ 
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen" clear_params="true">
+    <remap from="cmd_vel" to="/cmd_vel_mux/input/navi" />
+    <rosparam file="$(find svl_turtlebot)/config/gonogo/move_base_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find svl_turtlebot)/config/gonogo/base_local_planner_params.yaml" command="load" />
+    <rosparam file="$(find svl_turtlebot)/config/gonogo/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find svl_turtlebot)/config/gonogo/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find svl_turtlebot)/config/gonogo/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find svl_turtlebot)/config/gonogo/global_costmap_params_with_map.yaml" command="load" />
+  </node>
+
+   <!-- Run fake localization compatible with AMCL output -->
+   <node pkg="fake_localization" type="fake_localization" name="fake_localization" clear_params="true" output="screen">
+      <remap from="base_pose_ground_truth" to="odom" />
+      <param name="odom_frame_id"   value="odom" />
+      <param name="global_frame_id" value="map" />
+      <param name="base_frame_id"   value="base_link" />
+   </node>
+
+</launch>

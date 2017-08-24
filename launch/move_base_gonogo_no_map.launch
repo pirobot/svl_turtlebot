@@ -1,0 +1,16 @@
+ <launch>
+
+    <!-- Run a static transform between /odom and /map -->
+  <node pkg="tf" type="static_transform_publisher" name="odom_map_broadcaster" args="0 0 0 0 0 0 map odom 100" />
+ 
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen" clear_params="true">
+    <remap from="cmd_vel" to="/cmd_vel_mux/input/navi" />
+    <rosparam file="$(find svl_turtlebot)/config/gonogo/move_base_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find svl_turtlebot)/config/gonogo/base_local_planner_params.yaml" command="load" />
+    <rosparam file="$(find svl_turtlebot)/config/gonogo/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find svl_turtlebot)/config/gonogo/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find svl_turtlebot)/config/gonogo/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find svl_turtlebot)/config/gonogo/global_costmap_params_no_map.yaml" command="load" />
+  </node>
+
+</launch>
