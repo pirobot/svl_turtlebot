@@ -24,7 +24,6 @@ rosbag record -b 512 --lz4 -o $out_file \
 /camera/depth_registered/hw_registered/image_rect/compressedDepth \
 /camera/depth_registered/hw_registered/image_rect/compressedDepth/parameter_descriptions \
 /camera/depth_registered/hw_registered/image_rect/compressedDepth/parameter_updates \
-/camera/depth_registered/hw_registered/image_rect_raw \
 /camera/depth_registered/hw_registered/image_rect_raw/compressed \
 /camera/depth_registered/hw_registered/image_rect_raw/compressed/parameter_descriptions \
 /camera/depth_registered/hw_registered/image_rect_raw/compressed/parameter_updates \
@@ -155,6 +154,7 @@ rosbag record -b 512 --lz4 -o $out_file \
 /odom \
 /rosout \
 /rosout_agg \
+/scan \       
 /teleop_velocity_smoother/parameter_descriptions \
 /teleop_velocity_smoother/parameter_updates \
 /teleop_velocity_smoother/raw_cmd_vel \
