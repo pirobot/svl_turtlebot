@@ -1,0 +1,15 @@
+<launch>
+
+  <!-- Nodelet manager for this pipeline -->
+  <node pkg="nodelet" type="nodelet" args="manager" name="record_player_manager" output="screen"/>
+        
+  <!-- Decompress images if necessary -->
+  <node pkg="image_transport" type="republish" name="primesense_uncompress_rgb" args="compressed in:=camera/rgb/image_rect_color raw out:=/camera/rgb/image_rect_color" />
+
+  <node pkg="image_transport" type="republish" name="primesense_uncompress_depth" args="compressedDepth in:=camera/depth_registered/image_raw raw out:=camera/depth_registered/image_raw" />
+
+  <node pkg="image_transport" type="republish" name="theta_1_uncompress_rgb" args="compressedDepth in:=cv_camera_node/image_raw/compressed raw out:=cv_camera_node/image_raw" />
+
+  <node pkg="image_transport" type="republish" name="theta_2_uncompress_rgb" args="compressedDepth in:=cv_camera_node2/image_raw/compressed raw out:=cv_camera_node2/image_raw" />
+
+</launch>
